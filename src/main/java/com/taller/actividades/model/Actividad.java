@@ -11,8 +11,6 @@ import java.time.LocalDate;
 @Getter  @Setter
 @Builder
 public class Actividad {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
