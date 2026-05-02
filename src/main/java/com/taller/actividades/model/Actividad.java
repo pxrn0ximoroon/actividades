@@ -1,21 +1,27 @@
 package com.taller.actividades.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
+
 /**
- * Es una actividad del hogar asignada a un hijo por un tutor.
- * Contiene la informacion necesaria para hacer seguimiento de cada tarea.
- * @author Todo el grupo
+ * Entidad que representa una actividad del hogar asignada a un hijo por un tutor.
+ * Contiene la información necesaria para hacer seguimiento de cada tarea.
+ *
+ * @author Julian Andres - Andres Espinosa - Miguel David
+ * @version 1.0
+ * @since 2026
  */
 @Entity
 @Table(name = "actividades")
-@NoArgsConstructor  @AllArgsConstructor
-@Getter  @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Actividad {
-    /** Identificador unico generado automaticamente */
+
+    /** Identificador único generado automáticamente */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,24 +29,24 @@ public class Actividad {
     /** Nombre de la actividad */
     private String titulo;
 
-    /** Descripccion */
+    /** Descripción detallada de lo que hay que hacer */
     private String descripcion;
 
-    /** Fecha en que inicia*/
+    /** Fecha en que inicia la actividad */
     private LocalDate fechaInicio;
 
-    /** Fecha en que termina*/
+    /** Fecha límite para terminar la actividad */
     private LocalDate fechaTerminacion;
 
-    /** tipo de actividad*/
+    /** Tipo de actividad: Fisica, Acompanamiento, Supervision, Creativa */
     private String tipoActividad;
 
-    /** Que se va a hacer */
+    /** ID del quehacer del hogar al que pertenece */
     private Long idQuehacer;
 
-    /** identificador del tutor que asigno la tarea */
+    /** ID del tutor que asignó la tarea */
     private Long idTutor;
 
-    /** identificador del hijo al que se le asigno la tarea */
+    /** ID del hijo al que se le asignó la tarea */
     private Long idHijo;
 }
