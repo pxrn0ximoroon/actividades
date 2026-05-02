@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir una actividad</title>
+</head>
+<body>
+<h1>Actividad</h1>
+<form th:action="${actividad.id != null} ? @{/actividades/{id}(id=${actividad.id})} : @{/actividades}"
+      th:object="${actividad}" method="post">
+
+    <label>Titulo:</label><br>
+    <input type="text" th:field="*{titulo}" required/><br><br>
+
+    <label>Descripcion:</label><br>
+    <textarea th:field="*{descripcion}"></textarea><br><br>
+
+    <label>Fecha Inicio:</label><br>
+    <input type="date" th:field="*{fechaInicio}"/><br><br>
+
+    <label>Fecha Terminacion:</label><br>
+    <input type="date" th:field="*{fechaTerminacion}"/><br><br>
+
+    <label>Tipo Actividad:</label><br>
+    <select th:field="*{tipoActividad}">
+        <option value="Fisica">Fisica</option>
+        <option value="Acompanamiento">Acompanamiento</option>
+        <option value="Supervision">Supervision</option>
+        <option value="Creativa">Creativa</option>
+    </select><br><br>
+
+    <label> # Quehacer:</label><br>
+    <input type="number" th:field="*{idQuehacer}"/><br><br>
+
+    <label> Tutor:</label><br>
+    <input type="number" th:field="*{idTutor}"/><br><br>
+
+    <label> Hijo:</label><br>
+    <input type="number" th:field="*{idHijo}"/><br><br>
+
+    <button type="submit">Guardar</button>
+    <a href="/actividades">Cancelar</a>
+</form>
+</body>
+</html>

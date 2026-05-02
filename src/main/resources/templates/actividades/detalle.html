@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle Actividad</title>
+</head>
+<body>
+<h1>Detalle de Actividad</h1>
+
+<p><strong>ID:</strong> <span th:text="${actividad.id}"></span></p>
+<p><strong>Titulo:</strong> <span th:text="${actividad.titulo}"></span></p>
+<p><strong>Descripcion:</strong> <span th:text="${actividad.descripcion}"></span></p>
+<p><strong>Fecha Inicio:</strong> <span th:text="${actividad.fechaInicio}"></span></p>
+<p><strong>Fecha Terminacion:</strong> <span th:text="${actividad.fechaTerminacion}"></span></p>
+<p><strong>Tipo:</strong> <span th:text="${actividad.tipoActividad}"></span></p>
+<p><strong> # Quehacer:</strong> <span th:text="${actividad.idQuehacer}"></span></p>
+<p><strong> Tutor:</strong> <span th:text="${actividad.idTutor}"></span></p>
+<p><strong> Hijo:</strong> <span th:text="${actividad.idHijo}"></span></p>
+
+<a th:href="@{/actividades/{id}/editar(id=${actividad.id})}">Editar</a>
+<a href="/actividades">Volver</a>
+</body>
+</html>
