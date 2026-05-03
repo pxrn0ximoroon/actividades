@@ -70,25 +70,25 @@ public class ActividadRestController {
     }
     /**
      * Crea una nueva actividad con los datos enviados en el cuerpo.
-     * @param dto Datos de la actividad en JSON
+     * @param actividadDTO Datos de la actividad en JSON
      * @return La actividad creada con su ID asignado
      */
     @PostMapping
-    public ActividadResponse crear(@RequestBody ActividadDTO dto) {
-        return service.guardarDesdeDTO(dto);
+    public ActividadResponse crear(@RequestBody ActividadDTO actividadDTO) {
+        return service.guardarDesdeDTO(actividadDTO);
     }
 
     /**
      * Actualiza todos los datos de una actividad existente.
      *
      * @param id ID de la actividad a modificar
-     * @param dto Nuevos datos de la actividad en JSON
+     * @param actividadDTO datos de la actividad en JSON
      * @return La actividad actualizada o 404 si no existe
      */
     @PutMapping("/{id}")
     public ResponseEntity<ActividadResponse> actualizar(@PathVariable Long id,
-                                                        @RequestBody ActividadDTO dto) {
-        return service.actualizarDesdeDTO(id, dto)
+                                                        @RequestBody ActividadDTO actividadDTO) {
+        return service.actualizarDesdeDTO(id, actividadDTO)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

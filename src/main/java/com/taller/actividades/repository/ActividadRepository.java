@@ -1,6 +1,6 @@
 package com.taller.actividades.repository;
 
-import com.taller.actividades.model.Actividad;
+import com.taller.actividades.model.ActividadDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
  * @since 2026
  */
 @Repository
-public interface ActividadRepository extends JpaRepository<Actividad, Long> {
+public interface ActividadRepository extends JpaRepository<ActividadDTO, Long> {
 }

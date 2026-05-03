@@ -20,16 +20,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="actividad : ${actividades}">
-        <td th:text="${actividad.id}"></td>
-        <td th:text="${actividad.titulo}"></td>
-        <td th:text="${actividad.tipoActividad}"></td>
-        <td th:text="${actividad.fechaInicio}"></td>
-        <td th:text="${actividad.fechaTerminacion}"></td>
+    <tr th:each="actividadDTO : ${actividades}">
+        <td th:text="${actividadDTO.id}"></td>
+        <td th:text="${actividadDTO.titulo}"></td>
+        <td th:text="${actividadDTO.tipoActividad}"></td>
+        <td th:text="${actividadDTO.fechaInicio}"></td>
+        <td th:text="${actividadDTO.fechaTerminacion}"></td>
         <td>
-            <a th:href="@{/actividades/{id}(id=${actividad.id})}">Ver</a>
-            <a th:href="@{/actividades/{id}/editar(id=${actividad.id})}">Editar</a>
-            <form th:action="@{/actividades/{id}/eliminar(id=${actividad.id})}"
+            <a th:href="@{/actividades/{id}(id=${actividadDTO.id})}">Ver</a>
+            <a th:href="@{/actividades/{id}/editar(id=${actividadDTO.id})}">Editar</a>
+            <form th:action="@{/actividades/{id}/eliminar(id=${actividadDTO.id})}"
                   method="post" style="display:inline">
                 <button type="submit">Eliminar</button>
             </form>

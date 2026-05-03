@@ -1,8 +1,7 @@
 package com.taller.actividades.service;
 import com.taller.actividades.exception.*;
-import com.taller.actividades.model.ActividadResponse;
 import com.taller.actividades.model.ActividadDTO;
-import com.taller.actividades.model.Actividad;
+import com.taller.actividades.model.ActividadResponse;
 import com.taller.actividades.repository.ActividadRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -36,7 +35,7 @@ public class ActividadService {
      *
      * @return Lista con todas las actividades
      */
-    public List<Actividad> listarTodas() {
+    public List<ActividadDTO> listarTodas() {
         return repository.findAll();
     }
 
@@ -46,18 +45,18 @@ public class ActividadService {
      * @param id ID de la actividad
      * @return La actividad si existe, Optional vacío si no
      */
-    public Optional<Actividad> buscarPorId(Long id) {
+    public Optional<ActividadDTO> buscarPorId(Long id) {
         return repository.findById(id);
     }
 
     /**
      * Guarda una actividad nueva o actualiza una existente.
      *
-     * @param actividad Actividad a guardar
+     * @param actividadDTO Actividad a guardar
      * @return La actividad guardada con su ID
      */
-    public Actividad guardar(Actividad actividad) {
-        return repository.save(actividad);
+    public ActividadDTO guardar(ActividadDTO actividadDTO) {
+        return repository.save(actividadDTO);
     }
 
     /**
@@ -75,36 +74,24 @@ public class ActividadService {
      * @param dto objeto recibido del frontend
      * @return entidad lista para persistir
      */
-    private Actividad convertirDtoAEntidad(ActividadDTO dto) {
-        return Actividad.builder()
-                .titulo(dto.getTitulo())
-                .descripcion(dto.getDescripcion())
-                .fechaInicio(dto.getFechaInicio())
-                .fechaTerminacion(dto.getFechaTerminacion())
-                .tipoActividad(dto.getTipoActividad())
-                .idQuehacer(dto.getIdQuehacer())
-                .idTutor(dto.getIdTutor())
-                .idHijo(dto.getIdHijo())
-                .build();
-    }
 
     /**
      * Convierte una entidad Actividad a un objeto de respuesta.
      *
-     * @param actividad entidad recuperada de la base de datos
+     * @param actividadDTO entidad recuperada de la base de datos
      * @return objeto de respuesta para enviar al frontend
      */
-    private ActividadResponse convertirEntidadAResponse(Actividad actividad) {
+    private ActividadResponse convertirEntidadAResponse(ActividadDTO actividadDTO) {
         return ActividadResponse.builder()
-                .id(actividad.getId())
-                .titulo(actividad.getTitulo())
-                .descripcion(actividad.getDescripcion())
-                .fechaInicio(actividad.getFechaInicio())
-                .fechaTerminacion(actividad.getFechaTerminacion())
-                .tipoActividad(actividad.getTipoActividad())
-                .idQuehacer(actividad.getIdQuehacer())
-                .idTutor(actividad.getIdTutor())
-                .idHijo(actividad.getIdHijo())
+                .id(actividadDTO.getId())
+                .titulo(actividadDTO.getTitulo())
+                .descripcion(actividadDTO.getDescripcion())
+                .fechaInicio(actividadDTO.getFechaInicio())
+                .fechaTerminacion(actividadDTO.getFechaTerminacion())
+                .tipoActividad(actividadDTO.getTipoActividad())
+                .idQuehacer(actividadDTO.getIdQuehacer())
+                .idTutor(actividadDTO.getIdTutor())
+                .idHijo(actividadDTO.getIdHijo())
                 .build();
     }
 
@@ -123,12 +110,11 @@ public class ActividadService {
     /**
      * Guarda una actividad nueva recibida como DTO.
      *
-     * @param dto objeto recibido del frontend
+     * @param actividadDTO objeto recibido del frontend
      * @return actividad guardada como response
      */
-    public ActividadResponse guardarDesdeDTO(ActividadDTO dto) {
-        Actividad actividad = convertirDtoAEntidad(dto);
-        return convertirEntidadAResponse(repository.save(actividad));
+    public ActividadResponse guardarDesdeDTO(ActividadDTO actividadDTO) {
+        return convertirEntidadAResponse(repository.save(actividadDTO));
     }
 
     /**
@@ -154,19 +140,19 @@ public class ActividadService {
      * Actualiza una actividad existente desde un DTO
      *
      * @param id identificador de la actividad
-     * @param dto objeto con los datos nuevos
+     * @param actividadDTO objeto con los datos nuevos
      * @return actividad actualizada como response
      */
-    public Optional<ActividadResponse> actualizarDesdeDTO(Long id, ActividadDTO dto) {
+    public Optional<ActividadResponse> actualizarDesdeDTO(Long id, ActividadDTO actividadDTO) {
         return repository.findById(id).map(a -> {
-            a.setTitulo(dto.getTitulo());
-            a.setDescripcion(dto.getDescripcion());
-            a.setFechaInicio(dto.getFechaInicio());
-            a.setFechaTerminacion(dto.getFechaTerminacion());
-            a.setTipoActividad(dto.getTipoActividad());
-            a.setIdQuehacer(dto.getIdQuehacer());
-            a.setIdTutor(dto.getIdTutor());
-            a.setIdHijo(dto.getIdHijo());
+            a.setTitulo(actividadDTO.getTitulo());
+            a.setDescripcion(actividadDTO.getDescripcion());
+            a.setFechaInicio(actividadDTO.getFechaInicio());
+            a.setFechaTerminacion(actividadDTO.getFechaTerminacion());
+            a.setTipoActividad(actividadDTO.getTipoActividad());
+            a.setIdQuehacer(actividadDTO.getIdQuehacer());
+            a.setIdTutor(actividadDTO.getIdTutor());
+            a.setIdHijo(actividadDTO.getIdHijo());
             return convertirEntidadAResponse(repository.save(a));
         });
     }

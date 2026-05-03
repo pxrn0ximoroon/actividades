@@ -1,6 +1,6 @@
 package com.taller.actividades.controller;
 
-import com.taller.actividades.model.Actividad;
+import com.taller.actividades.model.ActividadDTO;
 import com.taller.actividades.service.ActividadService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,19 +50,19 @@ public class ActividadController {
      */
     @GetMapping("/nueva")
     public String nuevaForm(Model model) {
-        model.addAttribute("actividad", new Actividad());
+        model.addAttribute("actividad", new ActividadDTO());
         return "actividades/formulario";
     }
 
     /**
      * Guarda una actividad nueva desde el formulario.
      *
-     * @param actividad Datos enviados del formulario
+     * @param actividadDTO Datos enviados del formulario
      * @return Redirección a la lista de actividades
      */
     @PostMapping
-    public String guardar(@ModelAttribute Actividad actividad) {
-        service.guardar(actividad);
+    public String guardar(@ModelAttribute ActividadDTO actividadDTO) {
+        service.guardar(actividadDTO);
         return "redirect:/actividades";
     }
 
@@ -98,14 +98,14 @@ public class ActividadController {
      * Actualiza los datos de una actividad existente.
      *
      * @param id ID de la actividad
-     * @param actividad Datos actualizados del formulario
+     * @param actividadDTO Datos actualizados del formulario
      * @return Redirección a la lista de actividades
      */
     @PostMapping("/{id}")
     public String actualizar(@PathVariable Long id,
-                             @ModelAttribute Actividad actividad) {
-        actividad.setId(id);
-        service.guardar(actividad);
+                             @ModelAttribute ActividadDTO actividadDTO) {
+        actividadDTO.setId(id);
+        service.guardar(actividadDTO);
         return "redirect:/actividades";
     }
 

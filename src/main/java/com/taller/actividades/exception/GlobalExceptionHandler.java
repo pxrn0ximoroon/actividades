@@ -31,6 +31,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
+    /**
+     * Maneja otro tipo de casos
+     * @param ex exepcion lanzada
+     * @return Respuesta 505 con mensaje de error
+     */
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleException(Exception ex) {
         Map<String, Object> error = new HashMap<>();
