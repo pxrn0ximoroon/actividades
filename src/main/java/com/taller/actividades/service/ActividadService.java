@@ -1,6 +1,7 @@
 package com.taller.actividades.service;
-import com.taller.actividades.dto.ActividadResponse;
-import com.taller.actividades.dto.ActividadDTO;
+import com.taller.actividades.exception.*;
+import com.taller.actividades.model.ActividadResponse;
+import com.taller.actividades.model.ActividadDTO;
 import com.taller.actividades.model.Actividad;
 import com.taller.actividades.repository.ActividadRepository;
 import org.springframework.stereotype.Service;
@@ -136,10 +137,18 @@ public class ActividadService {
      * @param id identificador de la actividad
      * @return Optional con el response o vacio si no existe
      */
-    public Optional<ActividadResponse> buscarPorIdComoResponse(Long id) {
-        return repository.findById(id)
-                .map(this::convertirEntidadAResponse);
+    /*public Optional<ActividadResponse> buscarPorIdComoResponse(Long id) {
+     return repository.findById(id)
+              .map(this::convertirEntidadAResponse);
     }
+
+     */
+    public ActividadResponse buscarPorIdComoResponse(Long id) {
+        return repository.findById(id)
+                .map(this::convertirEntidadAResponse)
+                .orElseThrow(() -> new ActividadNotFoundException(id));
+    }
+
 
     /**
      * Actualiza una actividad existente desde un DTO

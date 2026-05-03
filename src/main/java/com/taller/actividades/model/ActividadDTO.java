@@ -1,4 +1,4 @@
-package com.taller.actividades.dto;
+package com.taller.actividades.model;
 
 import lombok.*;
 

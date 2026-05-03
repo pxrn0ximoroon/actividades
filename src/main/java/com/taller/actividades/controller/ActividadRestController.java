@@ -1,7 +1,7 @@
 package com.taller.actividades.controller;
 
-import com.taller.actividades.dto.ActividadDTO;
-import com.taller.actividades.dto.ActividadResponse;
+import com.taller.actividades.model.ActividadDTO;
+import com.taller.actividades.model.ActividadResponse;
 import com.taller.actividades.service.ActividadService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,13 +57,17 @@ public class ActividadRestController {
      * @param id ID de la actividad a buscar
      * @return La actividad encontrada o 404 si no existe
      */
+    /*
     @GetMapping("/{id}")
     public ResponseEntity<ActividadResponse> buscarPorId(@PathVariable Long id) {
         return service.buscarPorIdComoResponse(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+*/
+    public ResponseEntity<ActividadResponse> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarPorIdComoResponse(id));
+    }
     /**
      * Crea una nueva actividad con los datos enviados en el cuerpo.
      * @param dto Datos de la actividad en JSON
