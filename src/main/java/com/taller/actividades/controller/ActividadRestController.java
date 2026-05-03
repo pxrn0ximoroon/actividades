@@ -1,6 +1,7 @@
 package com.taller.actividades.controller;
 
-import com.taller.actividades.model.Actividad;
+import com.taller.actividades.dto.ActividadDTO;
+import com.taller.actividades.dto.ActividadResponse;
 import com.taller.actividades.service.ActividadService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,8 +47,8 @@ public class ActividadRestController {
      * @return Lista de actividades en formato JSON
      */
     @GetMapping
-    public List<Actividad> listarTodas() {
-        return service.listarTodas();
+    public List<ActividadResponse> listarTodas() {
+        return service.listarTodasComoResponse();
     }
 
     /**
@@ -57,37 +58,35 @@ public class ActividadRestController {
      * @return La actividad encontrada o 404 si no existe
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Actividad> buscarPorId(@PathVariable Long id) {
-        return service.buscarPorId(id)
+    public ResponseEntity<ActividadResponse> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorIdComoResponse(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     /**
      * Crea una nueva actividad con los datos enviados en el cuerpo.
-     *
-     * @param actividad Datos de la actividad en JSON
+     * @param dto Datos de la actividad en JSON
      * @return La actividad creada con su ID asignado
      */
     @PostMapping
-    public Actividad crear(@RequestBody Actividad actividad) {
-        return service.guardar(actividad);
+    public ActividadResponse crear(@RequestBody ActividadDTO dto) {
+        return service.guardarDesdeDTO(dto);
     }
 
     /**
      * Actualiza todos los datos de una actividad existente.
      *
      * @param id ID de la actividad a modificar
-     * @param actividad Nuevos datos de la actividad en JSON
+     * @param dto Nuevos datos de la actividad en JSON
      * @return La actividad actualizada o 404 si no existe
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Actividad> actualizar(@PathVariable Long id,
-                                                @RequestBody Actividad actividad) {
-        return service.buscarPorId(id).map(a -> {
-            actividad.setId(id);
-            return ResponseEntity.ok(service.guardar(actividad));
-        }).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ActividadResponse> actualizar(@PathVariable Long id,
+                                                        @RequestBody ActividadDTO dto) {
+        return service.actualizarDesdeDTO(id, dto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     /**
