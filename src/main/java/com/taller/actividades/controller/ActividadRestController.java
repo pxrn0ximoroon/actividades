@@ -57,14 +57,7 @@ public class ActividadRestController {
      * @param id ID de la actividad a buscar
      * @return La actividad encontrada o 404 si no existe
      */
-    /*
-    @GetMapping("/{id}")
-    public ResponseEntity<ActividadResponse> buscarPorId(@PathVariable Long id) {
-        return service.buscarPorIdComoResponse(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-*/
+        @GetMapping("/{id}")
     public ResponseEntity<ActividadResponse> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorIdComoResponse(id));
     }
