@@ -2,12 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Añadir una actividadDTO</title>
+    <title>Añadir una actividad</title>
 </head>
 <body>
 <h1>Actividad</h1>
-<form th:action="${actividadDTO.id != null} ? @{/actividades/{id}(id=${actividadDTO.id})} : @{/actividades}"
-      th:object="${actividadDTO}" method="post">
+<form th:action="${actividad.id != null} ? @{/actividades/{id}(id=${actividad.id})} : @{/actividades}"
+      th:object="${actividad}" method="post">
 
     <label>Titulo:</label><br>
     <input type="text" th:field="*{titulo}" required/><br><br>
