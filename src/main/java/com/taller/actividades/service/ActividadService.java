@@ -1,4 +1,6 @@
 package com.taller.actividades.service;
+
+import com.taller.actividades.mapper.ActividadMapper;
 import com.taller.actividades.exception.*;
 import com.taller.actividades.model.ActividadDTO;
 import com.taller.actividades.model.ActividadResponse;
@@ -18,16 +20,18 @@ import java.util.stream.Collectors;
 @Service
 public class ActividadService {
 
-    /** Repositorio para acceder a la base de datos */
+    /** Repositorio para acceder a la base de datos y mapper para interactuar con los archivos DTO */
     private final ActividadRepository repository;
+    private final ActividadMapper mapper;
 
     /**
      * Constructor con el repositorio inyectado.
-     *
+     * @param mapper
      * @param repository Repositorio de actividades
      */
-    public ActividadService(ActividadRepository repository) {
+    public ActividadService(ActividadRepository repository, ActividadMapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     /**
@@ -68,32 +72,6 @@ public class ActividadService {
         repository.deleteById(id);
     }
 
-    /**
-     * Convierte un DTO recibido del frontend a la entidad Actividad.
-     *
-     * @param dto objeto recibido del frontend
-     * @return entidad lista para persistir
-     */
-
-    /**
-     * Convierte una entidad Actividad a un objeto de respuesta.
-     *
-     * @param actividadDTO entidad recuperada de la base de datos
-     * @return objeto de respuesta para enviar al frontend
-     */
-    private ActividadResponse convertirEntidadAResponse(ActividadDTO actividadDTO) {
-        return ActividadResponse.builder()
-                .id(actividadDTO.getId())
-                .titulo(actividadDTO.getTitulo())
-                .descripcion(actividadDTO.getDescripcion())
-                .fechaInicio(actividadDTO.getFechaInicio())
-                .fechaTerminacion(actividadDTO.getFechaTerminacion())
-                .tipoActividad(actividadDTO.getTipoActividad())
-                .idQuehacer(actividadDTO.getIdQuehacer())
-                .idTutor(actividadDTO.getIdTutor())
-                .idHijo(actividadDTO.getIdHijo())
-                .build();
-    }
 
     /**
      * Retorna todas las actividades como lista de responses
@@ -103,7 +81,7 @@ public class ActividadService {
     public List<ActividadResponse> listarTodasComoResponse() {
         return repository.findAll()
                 .stream()
-                .map(this::convertirEntidadAResponse)
+                .map(mapper::toResponse)
                 .collect(Collectors.toList());
     }
 
@@ -114,7 +92,7 @@ public class ActividadService {
      * @return actividad guardada como response
      */
     public ActividadResponse guardarDesdeDTO(ActividadDTO actividadDTO) {
-        return convertirEntidadAResponse(repository.save(actividadDTO));
+        return mapper.toResponse(repository.save(actividadDTO));
     }
 
     /**
@@ -131,7 +109,7 @@ public class ActividadService {
      */
     public ActividadResponse buscarPorIdComoResponse(Long id) {
         return repository.findById(id)
-                .map(this::convertirEntidadAResponse)
+                .map(mapper::toResponse)
                 .orElseThrow(() -> new ActividadNotFoundException(id));
     }
 
@@ -153,7 +131,7 @@ public class ActividadService {
             a.setIdQuehacer(actividadDTO.getIdQuehacer());
             a.setIdTutor(actividadDTO.getIdTutor());
             a.setIdHijo(actividadDTO.getIdHijo());
-            return convertirEntidadAResponse(repository.save(a));
+            return mapper.toResponse(repository.save(a));
         });
     }
 }
