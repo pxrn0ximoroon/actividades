@@ -1,4 +1,4 @@
-package com.taller.actividades.exception;
+package pa.microservicios.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

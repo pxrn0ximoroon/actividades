@@ -1,7 +1,7 @@
-package com.taller.actividades.mapper;
+package pa.microservicios.mapper;
 
-import com.taller.actividades.model.ActividadDTO;
-import com.taller.actividades.model.ActividadResponse;
+import pa.microservicios.model.ActividadDTO;
+import pa.microservicios.model.ActividadResponse;
 import org.springframework.stereotype.Component;
 
 /**

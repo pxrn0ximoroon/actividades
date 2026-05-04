@@ -1,10 +1,10 @@
-package com.taller.actividades.service;
+package pa.microservicios.service;
 
-import com.taller.actividades.mapper.ActividadMapper;
-import com.taller.actividades.exception.*;
-import com.taller.actividades.model.ActividadDTO;
-import com.taller.actividades.model.ActividadResponse;
-import com.taller.actividades.repository.ActividadRepository;
+import pa.microservicios.exception.ActividadNotFoundException;
+import pa.microservicios.mapper.ActividadMapper;
+import pa.microservicios.model.ActividadDTO;
+import pa.microservicios.model.ActividadResponse;
+import pa.microservicios.repository.ActividadRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;

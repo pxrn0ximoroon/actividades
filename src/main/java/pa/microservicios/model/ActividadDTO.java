@@ -1,4 +1,4 @@
-package com.taller.actividades.model;
+package pa.microservicios.model;
 
 import jakarta.persistence.*;
 import lombok.*;

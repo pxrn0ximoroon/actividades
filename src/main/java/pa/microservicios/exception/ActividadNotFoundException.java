@@ -1,4 +1,4 @@
-package com.taller.actividades.exception;
+package pa.microservicios.exception;
 
 /** Excepcion cuando una Id no es encontrada
  * @author Todo el grupo

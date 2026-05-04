@@ -1,6 +1,6 @@
-package com.taller.actividades.repository;
+package pa.microservicios.repository;
 
-import com.taller.actividades.model.ActividadDTO;
+import pa.microservicios.model.ActividadDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

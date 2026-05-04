@@ -1,8 +1,8 @@
-package com.taller.actividades.controller;
+package pa.microservicios.controller;
 
-import com.taller.actividades.model.ActividadDTO;
-import com.taller.actividades.model.ActividadResponse;
-import com.taller.actividades.service.ActividadService;
+import pa.microservicios.model.ActividadDTO;
+import pa.microservicios.model.ActividadResponse;
+import pa.microservicios.service.ActividadService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
